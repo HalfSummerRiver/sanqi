@@ -6,7 +6,39 @@ const {
 
 const comic = document.querySelector('.container')
 
+const LOAD_TL = timeline();
+LOAD_TL
+    .to('.progress-bar', 0.8,{
+        width: '5%',
+        'background-color': '#f63a0f'
+    })
+    .to('.progress-bar', 0.8,{
+        width: '25%',
+        'background-color': '#f27011'
+    })
+    .to('.progress-bar', 0.8,{
+        width: '50%',
+        'background-color': '#f2b01e'
+    })
+    .to('.progress-bar', 1.6,{
+        width: '80%',
+        'background-color': '#f2d31b'
+    })
+    .addPause("PAUSE_WAIT")
+    .to('.progress-bar', 0.8,{
+        width: '100%',
+        'background-color': '#f2d31b'
+    })
+    .to('.progress', 0.5, {
+        opacity: 0
+    })
+    .to('.scroll-left', 0.5, {
+        opacity: 1
+    })
+
 window.onload = e => {
+    LOAD_TL.removePause("PAUSE_WAIT")
+    LOAD_TL.play();
     comic.classList.remove("not-display")
 }
 
@@ -307,7 +339,6 @@ const animStart = () => {
 
     SOUNDS.TUNE.onended = SOUNDS.MATCH.onended = () => MASTER_TL.play()
 
-    MASTER_TL.addPause('dddd')
     MASTER_TL.addPause('FLAME_ON')
     MASTER_TL.addPause('LIGHTS_OUT')
 }
@@ -342,7 +373,7 @@ var w = c.width = window.innerWidth,
     hh = h / 2,
 
     opts = {
-        strings: [ '三七', '天天都快乐!' ],
+        strings: [ '三七', '生日快乐!' ],
         charSize: 50,
         charSpacing: 60,
         lineHeight: 60,

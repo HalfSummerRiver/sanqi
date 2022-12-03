@@ -1,0 +1,115 @@
+.cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+}
+
+img {
+    width: 100%;
+}
+
+.img-container {
+    font-size: 0;
+    margin: 10px 15px;
+    border: 5px solid black;
+    border-radius: 6px;
+}
+
+.move-img-container {
+    font-size: 0;
+    opacity: 0;
+    margin: 10px 15px;
+    border: 5px solid black;
+    border-radius: 6px;
+}
+
+.comic {
+    z-index: -1;
+    width: 100%;
+    margin-bottom: -300px;
+}
+
+.black-ctn {
+    width: 100%;
+    height: 500px;
+}
+
+.scroll-left {
+    opacity: 0;
+    position: absolute;
+    right: 50px;
+    bottom: 100px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.btn {
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-weight: bold;
+    color: #ffffff;
+    padding: 16px 30px;
+    position: relative;
+    cursor: pointer;
+    perspective: 200px;
+    font-size: 1rem;
+    line-height: 30px;
+}
+
+.btn:before {
+    transition: all 0.25s;
+}
+
+.btn:hover:before {
+    background-color: #e38a64;
+    transition: all 0.25s;
+}
+
+.not-display {
+    display: none;
+}
+
+/* Hand Drawn Button Start */
+.btn:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    background-color: #F998BA;
+    /* Apply the sketch effect from SVG */
+    filter: url(#sketch);
+    /* Fill the background with the effect */
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    /*
+    * Set the border radius for a hand drawn look.
+    * This should be set so that the larger radius
+    * is on the larger side.
+    *
+    * You can also add some randomness in with Sass
+    * to easily create many unique variations:
+    *
+    * $corners: 25px 18px, 30px 12px, 14px 18px, 30px 18px;
+    *
+    * border-top-left-radius: nth($corners,random(length($corners)));
+    * border-top-right-radius: nth($corners,random(length($corners)));
+    * border-bottom-right-radius: nth($corners,random(length($corners)));
+    * border-bottom-left-radius: nth($corners,random(length($corners)));
+    */
+    border-top-left-radius: 107px 49px;
+    border-top-right-radius: 76px 70px;
+    border-bottom-right-radius: 110px 48px;
+    border-bottom-left-radius: 45px 86px;
+    /*
+    * Add skew to add variation to the box
+    * and translate to fix the center
+    */
+    transform: rotateY(-3deg) translate(-18px);
+}
