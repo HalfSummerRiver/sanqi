@@ -45,15 +45,15 @@ window.onload = e => {
 const LEFT_BTN = document.querySelector('.scroll-left')
 const BTN = document.querySelector('.birthday-button__button')
 const SOUNDS = {
-    CHEER: new Audio('audio/cheer-done.mp3'),
-    MATCH: new Audio('audio/match-done.mp3'),
-    TUNE: new Audio('audio/tune-done.mp3'),
-    ON: new Audio('audio/on-done.mp3'),
-    BLOW: new Audio('audio/blow-done.mp3'),
-    POP1: new Audio('audio/pop1.mp3'),
-    POP2: new Audio('audio/pop2.mp3'),
-    POP3: new Audio('audio/pop3.mp3'),
-    HORN: new Audio('audio/horn-done.mp3')
+    CHEER: new Audio('https://s2-12475.kwimgs.com/kos/nlav12475/qatar2022/medal/audio/cheer-done.mp3'),
+    MATCH: new Audio('https://s2-12475.kwimgs.com/kos/nlav12475/qatar2022/medal/audio/match-done.mp3'),
+    TUNE: new Audio('https://s2-12475.kwimgs.com/kos/nlav12475/qatar2022/medal/audio/tune-done.mp3'),
+    ON: new Audio('https://s2-12475.kwimgs.com/kos/nlav12475/qatar2022/medal/audio/on-done.mp3'),
+    BLOW: new Audio('https://s2-12475.kwimgs.com/kos/nlav12475/qatar2022/medal/audio/blow-done.mp3'),
+    POP1: new Audio('https://s2-12475.kwimgs.com/kos/nlav12475/qatar2022/medal/audio/pop1.mp3'),
+    POP2: new Audio('https://s2-12475.kwimgs.com/kos/nlav12475/qatar2022/medal/audio/pop2.mp3'),
+    POP3: new Audio('https://s2-12475.kwimgs.com/kos/nlav12475/qatar2022/medal/audio/pop3.mp3'),
+    HORN: new Audio('https://s2-12475.kwimgs.com/kos/nlav12475/qatar2022/medal/audio/horn-done.mp3')
 }
 LEFT_BTN.addEventListener('click', () => {
     timeline().to('.cover', {
