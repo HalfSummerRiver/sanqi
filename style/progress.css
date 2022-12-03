@@ -9,7 +9,7 @@
 
 .progress {
     position: absolute;
-    top: 750px;
+    top: 600px;
     left: 50%;
     transform: translateX(-50%);
     margin: 0 auto;
