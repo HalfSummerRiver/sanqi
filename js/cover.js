@@ -1,8 +1,10 @@
 const {
     gsap,
-    gsap: { to, timeline, set, delayedCall },
+    gsap: {to, timeline, set},
     Splitting
 } = window
+
+const LEFT_BTN = document.querySelector('.scroll-left')
 const BTN = document.querySelector('.birthday-button__button')
 const SOUNDS = {
     CHEER: new Audio('audio/cheer-done.mp3'),
@@ -15,39 +17,82 @@ const SOUNDS = {
     POP3: new Audio('audio/pop3.mp3'),
     HORN: new Audio('audio/horn-done.mp3')
 }
+LEFT_BTN.addEventListener('click', () => {
+    timeline().to('.cover', {
+        x: -1000, duration: 1,
+        onComplete: () => {
+            set('.cover', {display: 'none'})
+            set('body', {overflow: 'auto'})
+        }
+    })
+})
 
-// Import the data to customize and insert them into page
-const fetchData = () => {
-    fetch("customize.json")
-        .then(data => data.json())
-        .then(data => {
-            dataArr = Object.keys(data);
-            dataArr.map(customData => {
-                if (data[customData] !== "") {
-                    if (customData === "imagePath") {
-                        document
-                            .querySelector(`[data-node-name*="${customData}"]`)
-                            .setAttribute("src", data[customData]);
-                    } else {
-                        document.querySelector(`[data-node-name*="${customData}"]`).innerText = data[customData];
-                    }
+// comic
+const height = document.documentElement.clientHeight
+window.scroll(0, 0)
+const throttle = (func, interval) => {
+    let timer
+
+    return (...args) => {
+        if (timer) {
+            return
+        }
+        timer = setTimeout(() => {
+            func.apply(this, [args])
+            timer = null
+        }, interval)
+    }
+}
+
+const ICON = document.querySelector('.scroll-icon')
+const throttleScroll = throttle(e => {
+    if (document.documentElement.scrollTop > 0) {
+        ICON.classList.add("not-display")
+    } else if (document.documentElement.scrollTop <= 0) {
+        ICON.classList.remove("not-display")
+    }
+    document.querySelectorAll('.move-img-container').forEach((item, index) => {
+        if (item.classList.contains("move-flag")) {
+            return;
+        }
+        let topTarget = height - item.clientHeight / 2
+        if (index === 0) {
+
+        }
+        if (!item.classList.contains("move-done")
+            && item.getBoundingClientRect().top < topTarget + 500) {
+            timeline().to(item, {
+                y: -500, duration: 0.8, opacity: 1,
+                onStart: () => {
+                    item.classList.add("move-flag")
+                },
+                onComplete: () => {
+                    item.classList.remove("move-flag")
+                    item.classList.add("move-done")
                 }
-
-                // Check if the iteration is over
-                // Run amimation if so
-                if ( dataArr.length === dataArr.indexOf(customData) + 1 ) {
-                    animationTimeline();
+            })
+        } else if (item.classList.contains("move-done")
+            && item.getBoundingClientRect().top > topTarget) {
+            timeline().to(item, {
+                y: 500, duration: 1, opacity: 0,
+                onStart: () => {
+                    item.classList.add("move-flag")
+                },
+                onComplete: () => {
+                    item.classList.remove("move-flag")
+                    item.classList.remove("move-done")
                 }
-            });
-        });
-};
+            })
+        }
+    });
+}, 500)
 
-const MASTER_TL = timeline()
-// Run fetch and animation in sequence
-fetchData();
+window.addEventListener('scroll', function (e) {
+    throttleScroll(e)
+})
 
+// cake
 Splitting()
-
 const EYES = document.querySelector('.cake__eyes')
 const BLINK = eyes => {
     gsap.set(eyes, { scaleY: 1 })
@@ -141,10 +186,10 @@ const SHAKE_TL = () =>
                     set('.cake__face--straining', { display: 'none' })
                     set('.cake__face', { display: 'block' })
                 },
-                x: 1,
-                y: 1,
-                repeat: 13,
-                duration: 0.1,
+                // x: 1,
+                // y: ,
+                // repeat: 13,
+                duration: 1.3,
             },
             0
         )
@@ -176,32 +221,15 @@ const LIGHTS_OUT = () =>
         '--transparency-alpha': 1,
     })
 
-const CLICK_GO_ON = () => timeline()
-    .to('.char', {
-        color: 'hsl(var(--hue, 0), calc(var(--char-sat, 0) * 1%), calc(var(--char-light, 0) * 1%))'
-    })
-    .to(".six", 0.5, {
-        opacity: 0,
-        y: -30,
-        zIndex: "-1"
-    })
-    .to('.birthday-button',
-    {
-        bottom: '45%',
-        duration: 1.5,
-    })
-
 const LAST_TL = () => timeline().to('.body', {
     onStart: () => {
         set('.last', {
             display: 'block'
         })
-        set('.birthday-button', {
+        set(['.cover', '.container'], {
             display: 'none'
         })
         anim();
-        // delayedCall(2, RESET)
-        // BTN.removeAttribute('disabled')
     }
 })
 const RESET = () => {
@@ -242,179 +270,14 @@ const RESET = () => {
         scale: 0,
         transformOrigin: '50% 50%',
     })
-    set('.birthday-button', { scale: 0.6, x: 0, y: 0 })
+    // set('.birthday-button', { scale: 0.6, x: 0, y: 0 })
     set('.birthday-button__cake', { display: 'none' })
     set('.cake__candle', { scaleY: 0, transformOrigin: '50% 100%' })
 }
 RESET()
-// Animation Timeline
-const animationTimeline = () => {
-    // Spit chars that needs to be animated individually
-    const textBoxChars = document.getElementsByClassName("hbd-chatbox")[0];
-    const hbd = document.getElementsByClassName("wish-hbd")[0];
-
-    textBoxChars.innerHTML = `<span>${textBoxChars.innerHTML
-        .split("")
-        .join("</span><span>")}</span`;
-
-    hbd.innerHTML = `<span>${hbd.innerHTML
-        .split("")
-        .join("</span><span>")}</span`;
-
-    const ideaTextTrans = {
-        opacity: 0,
-        y: -20,
-        rotationX: 5,
-        skewX: "15deg"
-    };
-
-    const ideaTextTransLeave = {
-        opacity: 0,
-        y: 20,
-        rotationY: 5,
-        skewX: "-15deg"
-    };
-
+const MASTER_TL = timeline()
+const animStart = () => {
     MASTER_TL
-        .to(".container", 0.1, {
-            visibility: "visible"
-        })
-        .from(".one", 0.7, {
-            opacity: 0,
-            y: 10
-        })
-        .from(".two", 0.4, {
-            opacity: 0,
-            y: 10
-        })
-        .to(".one", 0.7, {
-                opacity: 0,
-                y: 10
-            }, "+=2.5")
-        .to(".two", 0.7, {
-                opacity: 0,
-                y: 10
-            }, "-=1")
-        .from(".three", 0.7, {
-            opacity: 0,
-            y: 10
-            // scale: 0.7
-        })
-        .to(".three", 0.7, {
-                opacity: 0,
-                y: 10
-            }, "+=2")
-        .from(".four", 0.7, {
-            scale: 0.2,
-            opacity: 0
-        })
-        .from(".fake-btn", 0.3, {
-            scale: 0.2,
-            opacity: 0
-        })
-        .staggerTo(".hbd-chatbox span", 0.5, {
-                visibility: "visible"
-            }, 0.05)
-        .to(".fake-btn", 0.1, {
-            backgroundColor: "rgb(127, 206, 248)"
-        })
-        .to(".four", 0.5, {
-                scale: 0.2,
-                opacity: 0,
-                y: -150
-            }, "+=0.7")
-        .from(".idea-1", 0.7, ideaTextTrans)
-        .to(".idea-1", 0.7, ideaTextTransLeave, "+=1.5")
-        .from(".idea-2", 0.7, ideaTextTrans)
-        .to(".idea-2", 0.7, ideaTextTransLeave, "+=1.5")
-        .from(".idea-3", 0.7, ideaTextTrans)
-        .to(".idea-3 strong", 0.5, {
-            scale: 1.2,
-            x: 10,
-            backgroundColor: "rgb(21, 161, 237)",
-            color: "#fff"
-        })
-        .to(".idea-3", 0.7, ideaTextTransLeave, "+=1.5")
-        .from(".idea-4", 0.7, ideaTextTrans)
-        .to(".idea-4", 0.7, ideaTextTransLeave, "+=1.5")
-        .from(".idea-5", 0.7, {
-                rotationX: 15,
-                rotationZ: -10,
-                skewY: "-5deg",
-                y: 50,
-                z: 10,
-                opacity: 0
-            }, "+=0.5")
-        .to(".idea-5 .smiley", 0.7, {
-                rotation: 90,
-                x: 8
-            }, "+=0.4")
-        .to(".idea-5", 0.7, {
-                scale: 0.2,
-                opacity: 0
-            }, "+=2")
-        .staggerFrom(".idea-6 span", 0.8, {
-                scale: 3,
-                opacity: 0,
-                rotation: 15,
-                ease: Expo.easeOut
-            }, 0.2)
-        .staggerTo(".idea-6 span", 0.8, {
-                scale: 3,
-                opacity: 0,
-                rotation: -15,
-                ease: Expo.easeOut
-            }, 0.2, "+=1")
-        .staggerFromTo(".baloons img", 2.5, {
-                opacity: 0.9,
-                y: 1400
-            },
-            {
-                opacity: 1,
-                y: -1000
-            }, 0.2)
-        .from(".lydia-dp", 0.5, {
-                scale: 3.5,
-                opacity: 0,
-                x: 25,
-                y: -25,
-                rotationZ: -45
-            }, "-=2")
-        .from(".hat", 0.5, {
-            x: -100,
-            y: 350,
-            rotation: -180,
-            opacity: 0
-        })
-        .staggerFrom(".wish-hbd span", 0.7, {
-                opacity: 0,
-                y: -50,
-                // scale: 0.3,
-                rotation: 150,
-                skewX: "30deg",
-                ease: Elastic.easeOut.config(1, 0.5)
-            }, 0.1
-        )
-        .staggerFromTo(".wish-hbd span", 0.7, {
-                scale: 1.4,
-                rotationY: 150
-            },
-            {
-                scale: 1,
-                rotationY: 0,
-                color: "#ff69b4",
-                ease: Expo.easeOut
-            }, 0.1, "party")
-        .from(".wish h5", 0.5, {
-                opacity: 0,
-                y: 10,
-                skewX: "-15deg"
-            }, "party")
-        .to(".birthday-button", {
-            opacity: 1,
-            duration: 1
-        })
-        .add(CLICK_GO_ON(), 'CLICK_GO_ON')
         .set('.birthday-button__cake', { display: 'block' })
         .to('.birthday-button', {
             scale: 1,
@@ -438,13 +301,19 @@ const animationTimeline = () => {
 
     SOUNDS.TUNE.onended = SOUNDS.MATCH.onended = () => MASTER_TL.play()
 
-    MASTER_TL.addPause('CLICK_GO_ON')
+    MASTER_TL.addPause('dddd')
     MASTER_TL.addPause('FLAME_ON')
     MASTER_TL.addPause('LIGHTS_OUT')
-};
-
+}
 
 BTN.addEventListener('click', () => {
+    set('body', {overflow: 'hidden'})
+    timeline()
+        .to(".move-img-container", 0.8, { opacity: 0})
+        .to(".birthday-button", {
+            y: -700,
+            duration: 1.5
+        })
     SOUNDS.BLOW.play()
     SOUNDS.CHEER.play()
     SOUNDS.TUNE.play()
@@ -455,9 +324,8 @@ BTN.addEventListener('click', () => {
     SOUNDS.ON.play()
     SOUNDS.HORN.play()
     BTN.setAttribute('disabled', true)
-    MASTER_TL.resume()
+    animStart()
 })
-
 
 // last.js
 var w = c.width = window.innerWidth,
@@ -468,10 +336,10 @@ var w = c.width = window.innerWidth,
     hh = h / 2,
 
     opts = {
-        strings: [ '小侯', '生日快乐!' ],
-        charSize: 30,
-        charSpacing: 35,
-        lineHeight: 40,
+        strings: [ '三七', '天天都快乐!' ],
+        charSize: 120,
+        charSpacing: 140,
+        lineHeight: 140,
 
         cx: w / 2,
         cy: h / 2,
@@ -482,7 +350,7 @@ var w = c.width = window.innerWidth,
         fireworkSpawnTime: 200,
         fireworkBaseReachTime: 30,
         fireworkAddedReachTime: 30,
-        fireworkCircleBaseSize: 20,
+        fireworkCircleBaseSize: 70,
         fireworkCircleAddedSize: 10,
         fireworkCircleBaseTime: 30,
         fireworkCircleAddedTime: 30,
@@ -501,7 +369,7 @@ var w = c.width = window.innerWidth,
         balloonSpawnTime: 20,
         balloonBaseInflateTime: 10,
         balloonAddedInflateTime: 10,
-        balloonBaseSize: 20,
+        balloonBaseSize: 70,
         balloonAddedSize: 20,
         balloonBaseVel: .4,
         balloonAddedVel: .4,
