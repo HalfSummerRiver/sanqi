@@ -33,7 +33,9 @@ body {
 }
 
 .birthday-button {
-    /*transform: scale(0.6);*/
+    transform: scale(0.6);
+    margin-top: -310px;
+    margin-left: -180px;
 }
 .birthday-button__text {
     position: absolute;

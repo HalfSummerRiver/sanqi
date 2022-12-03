@@ -67,7 +67,6 @@ LEFT_BTN.addEventListener('click', () => {
 
 // comic
 const height = document.documentElement.clientHeight
-window.scroll(0, 0)
 const throttle = (func, interval) => {
     let timer
 
@@ -94,9 +93,6 @@ const throttleScroll = throttle(e => {
             return;
         }
         let topTarget = height - item.clientHeight / 2
-        if (index === 0) {
-
-        }
         if (!item.classList.contains("move-done")
             && item.getBoundingClientRect().top < topTarget + 500) {
             timeline().to(item, {
@@ -112,7 +108,7 @@ const throttleScroll = throttle(e => {
         } else if (item.classList.contains("move-done")
             && item.getBoundingClientRect().top > topTarget) {
             timeline().to(item, {
-                y: 500, duration: 1, opacity: 0,
+                y: 0, duration: 1, opacity: 0,
                 onStart: () => {
                     item.classList.add("move-flag")
                 },
@@ -227,6 +223,7 @@ const SHAKE_TL = () =>
                 // x: 1,
                 // y: ,
                 // repeat: 13,
+                "--vvv": 1,
                 duration: 1.3,
             },
             0
@@ -317,10 +314,6 @@ const MASTER_TL = timeline()
 const animStart = () => {
     MASTER_TL
         .set('.birthday-button__cake', { display: 'block' })
-        .to('.birthday-button', {
-            scale: 1,
-            duration: 0.2,
-        })
         .to('.char', { '--char-sat': 70, '--char-light': 65, duration: 0.2 }, 0)
         .to('.char', {
             delay: 0.75,
@@ -348,8 +341,13 @@ BTN.addEventListener('click', () => {
     timeline()
         .to(".move-img-container", 0.8, { opacity: 0})
         .to(".birthday-button", {
-            y: -200,
-            duration: 1.5
+            x: 90,
+            y: -180,
+            duration: 1.2
+        })
+        .to('.birthday-button', {
+        scale: 1,
+        duration: 0.2,
         })
     SOUNDS.BLOW.play()
     SOUNDS.CHEER.play()
