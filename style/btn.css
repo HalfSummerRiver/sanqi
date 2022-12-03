@@ -45,7 +45,7 @@ body {
     text-align: center;
     align-items: center;
     justify-content: center;
-    font-size: 3rem;
+    font-size: 1.5rem;
     font-family: sans-serif;
     font-weight: bold;
 }
@@ -56,22 +56,22 @@ body {
 .birthday-button:before {
     content: '';
     position: absolute;
-    height: 300px;
-    width: 300px;
+    height: 150px;
+    width: 150px;
     background: radial-gradient(var(--glow), var(--transparent) 30%), radial-gradient(var(--glow), var(--transparent) 50%);
     border-radius: 50%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -70%) scale(calc(var(--flame) * 3));
     z-index: 2;
-    filter: blur(30px);
+    filter: blur(15px);
     opacity: var(--flame);
 }
 .birthday-button:after {
     content: '';
-    height: 60px;
-    width: 800px;
-    filter: blur(30px);
+    height: 30px;
+    width: 400px;
+    filter: blur(15px);
     position: absolute;
     background: radial-gradient(var(--glow), var(--transparent) 20%), radial-gradient(var(--glow), var(--transparent));
     top: 100%;
@@ -80,12 +80,12 @@ body {
     opacity: var(--flame);
 }
 .birthday-button__button {
-    width: 480px;
-    height: 200px;
+    width: 240px;
+    height: 100px;
     position: relative;
     border: 0;
     background: var(--icing);
-    border-radius: 28px;
+    border-radius: 14px;
     cursor: pointer;
 }
 .birthday-button__cake {
@@ -93,7 +93,7 @@ body {
     bottom: 0;
     left: 50%;
     transform: translate(-50%, 0);
-    width: 579px;
+    width: 289.5px;
     display: none;
 }
 .cake__eye-body {
@@ -141,11 +141,11 @@ body {
     --flame: 0;
 }
 label {
-    height: 88px;
-    width: 88px;
+    height: 44px;
+    width: 4px;
     position: fixed;
-    bottom: 2rem;
-    right: 2rem;
+    bottom: 1rem;
+    right: 1rem;
     cursor: pointer;
 }
 label > svg {
@@ -178,19 +178,19 @@ label svg:nth-of-type(1) {
 .last p {
     margin: 0 0;
     position: absolute;
-    font: 32px Verdana;
+    font: 16px Verdana;
     color: #eee;
-    height: 50px;
-    top: calc( 100vh - 60px );
-    text-shadow: 0 0 4px white;
+    height: 25px;
+    top: calc( 100vh - 30px );
+    text-shadow: 0 0 2px white;
 }
 .last p a {
     text-decoration: none;
     color: #aaa;
 }
 .last span {
-    font-size: 22px;
+    font-size: 11px;
 }
 .last p > a:first-of-type {
-    font-size: 30px;
+    font-size: 15px;
 }

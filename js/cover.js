@@ -4,6 +4,10 @@ const {
     Splitting
 } = window
 
+window.onload = e => {
+
+}
+
 const LEFT_BTN = document.querySelector('.scroll-left')
 const BTN = document.querySelector('.birthday-button__button')
 const SOUNDS = {
@@ -311,7 +315,7 @@ BTN.addEventListener('click', () => {
     timeline()
         .to(".move-img-container", 0.8, { opacity: 0})
         .to(".birthday-button", {
-            y: -700,
+            y: -200,
             duration: 1.5
         })
     SOUNDS.BLOW.play()
@@ -337,9 +341,9 @@ var w = c.width = window.innerWidth,
 
     opts = {
         strings: [ '三七', '天天都快乐!' ],
-        charSize: 120,
-        charSpacing: 140,
-        lineHeight: 140,
+        charSize: 50,
+        charSpacing: 60,
+        lineHeight: 60,
 
         cx: w / 2,
         cy: h / 2,
@@ -350,7 +354,7 @@ var w = c.width = window.innerWidth,
         fireworkSpawnTime: 200,
         fireworkBaseReachTime: 30,
         fireworkAddedReachTime: 30,
-        fireworkCircleBaseSize: 70,
+        fireworkCircleBaseSize: 30,
         fireworkCircleAddedSize: 10,
         fireworkCircleBaseTime: 30,
         fireworkCircleAddedTime: 30,
@@ -369,7 +373,7 @@ var w = c.width = window.innerWidth,
         balloonSpawnTime: 20,
         balloonBaseInflateTime: 10,
         balloonAddedInflateTime: 10,
-        balloonBaseSize: 70,
+        balloonBaseSize: 30,
         balloonAddedSize: 20,
         balloonBaseVel: .4,
         balloonAddedVel: .4,
