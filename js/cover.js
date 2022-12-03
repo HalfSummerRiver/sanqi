@@ -4,8 +4,10 @@ const {
     Splitting
 } = window
 
-window.onload = e => {
+const comic = document.querySelector('.container')
 
+window.onload = e => {
+    comic.classList.remove("not-display")
 }
 
 const LEFT_BTN = document.querySelector('.scroll-left')
