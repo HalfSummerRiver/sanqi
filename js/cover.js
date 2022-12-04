@@ -8,24 +8,24 @@ const comic = document.querySelector('.container')
 
 const LOAD_TL = timeline();
 LOAD_TL
-    .to('.progress-bar', 0.8,{
+    .to('.progress-bar', 0.8, {
         width: '5%',
         'background-color': '#f63a0f'
     })
-    .to('.progress-bar', 0.8,{
+    .to('.progress-bar', 0.8, {
         width: '25%',
         'background-color': '#f27011'
     })
-    .to('.progress-bar', 0.8,{
+    .to('.progress-bar', 0.8, {
         width: '50%',
         'background-color': '#f2b01e'
     })
-    .to('.progress-bar', 1.6,{
+    .to('.progress-bar', 1.6, {
         width: '80%',
         'background-color': '#f2d31b'
     })
     .addPause("PAUSE_WAIT")
-    .to('.progress-bar', 0.8,{
+    .to('.progress-bar', 0.8, {
         width: '100%',
         'background-color': '#f2d31b'
     })
@@ -129,7 +129,7 @@ window.addEventListener('scroll', function (e) {
 Splitting()
 const EYES = document.querySelector('.cake__eyes')
 const BLINK = eyes => {
-    gsap.set(eyes, { scaleY: 1 })
+    gsap.set(eyes, {scaleY: 1})
     if (eyes.BLINK_TL) eyes.BLINK_TL.kill()
     eyes.BLINK_TL = new gsap.timeline({
         delay: Math.floor(Math.random() * 4) + 1,
@@ -173,22 +173,22 @@ const FROSTING_TL = () =>
         )
 // Extract to sprinkle
 const SPRINKLES_TL = () =>
-    timeline().to('.cake__sprinkle', { scale: 1, duration: 0.06, stagger: 0.02 })
+    timeline().to('.cake__sprinkle', {scale: 1, duration: 0.06, stagger: 0.02})
 // Extract out to your own timeline
 const SPIN_TL = () =>
     timeline()
-        .set('.cake__frosting-patch', { display: 'block' })
+        .set('.cake__frosting-patch', {display: 'block'})
         .to(
             ['.cake__frosting--duplicate', '.cake__sprinkles--duplicate'],
-            { x: 0, duration: 1 },
+            {x: 0, duration: 1},
             0
         )
         .to(
             ['.cake__frosting--start', '.cake__sprinkles--initial'],
-            { x: 65, duration: 1 },
+            {x: 65, duration: 1},
             0
         )
-        .to('.cake__face', { duration: 1, x: -48.82 }, 0)
+        .to('.cake__face', {duration: 1, x: -48.82}, 0)
 
 const flickerSpeed = 0.1
 const FLICKER_TL = timeline()
@@ -210,15 +210,15 @@ const FLICKER_TL = timeline()
     )
 
 const SHAKE_TL = () =>
-    timeline({ delay: 0.5 })
-        .set('.cake__face', { display: 'none' })
-        .set('.cake__face--straining', { display: 'block' })
+    timeline({delay: 0.5})
+        .set('.cake__face', {display: 'none'})
+        .set('.cake__face--straining', {display: 'block'})
         .to(
             '.birthday-button',
             {
                 onComplete: () => {
-                    set('.cake__face--straining', { display: 'none' })
-                    set('.cake__face', { display: 'block' })
+                    set('.cake__face--straining', {display: 'none'})
+                    set('.cake__face', {display: 'block'})
                 },
                 // x: 1,
                 // y: ,
@@ -243,8 +243,8 @@ const SHAKE_TL = () =>
         )
 const FLAME_TL = () =>
     timeline({})
-        .to('.cake__candle', { '--flame': 1, stagger: 0.2, duration: 0.1 })
-        .to('body', { '--flame': 1, '--lightness': 5, duration: 0.2, delay: 0.2 })
+        .to('.cake__candle', {'--flame': 1, stagger: 0.2, duration: 0.1})
+        .to('body', {'--flame': 1, '--lightness': 5, duration: 0.2, delay: 0.2})
 const LIGHTS_OUT = () =>
     timeline().to('body', {
         delay: 0.5,
@@ -284,44 +284,54 @@ const RESET = () => {
         '--transparency-alpha': 0,
         '--flame': 0,
     })
-    set('.cake__candle', { '--flame': 0 })
+    set('.cake__candle', {'--flame': 0})
     to('body', {
         '--lightness': 97,
         duration: 0.25,
     })
     // SET THESE
-    set('.cake__frosting--end', { opacity: 0 })
+    set('.cake__frosting--end', {opacity: 0})
     set('#frosting', {
         transformOrigin: '50% 10%',
         scaleX: 0,
         scaleY: 0,
     })
-    set('.cake__frosting-patch', { display: 'none' })
-    set(['.cake__frosting--duplicate', '.cake__sprinkles--duplicate'], { x: -65 })
-    set('.cake__face', { x: -110 })
-    set('.cake__face--straining', { display: 'none' })
+    set('.cake__frosting-patch', {display: 'none'})
+    set(['.cake__frosting--duplicate', '.cake__sprinkles--duplicate'], {x: -65})
+    set('.cake__face', {x: -110})
+    set('.cake__face--straining', {display: 'none'})
     set('.cake__sprinkle', {
         '--sprinkle-hue': () => Math.random() * 360,
         scale: 0,
         transformOrigin: '50% 50%',
     })
     // set('.birthday-button', { scale: 0.6, x: 0, y: 0 })
-    set('.birthday-button__cake', { display: 'none' })
-    set('.cake__candle', { scaleY: 0, transformOrigin: '50% 100%' })
+    set('.birthday-button__cake', {display: 'none'})
+    set('.cake__candle', {scaleY: 0, transformOrigin: '50% 100%'})
 }
 RESET()
 const MASTER_TL = timeline()
 const animStart = () => {
     MASTER_TL
-        .set('.birthday-button__cake', { display: 'block' })
-        .to('.char', { '--char-sat': 70, '--char-light': 65, duration: 0.2 }, 0)
+        .to(".move-img-container", 0.4, {opacity: 0})
+        .to(".birthday-button", {
+            x: 90,
+            y: -200,
+            duration: 1.5
+        })
+        .set('.birthday-button__cake', {display: 'block'})
+        .to('.birthday-button', {
+            scale: 1,
+            duration: 0.2,
+        })
+        .to('.char', {'--char-sat': 70, '--char-light': 65, duration: 0.2}, 0)
         .to('.char', {
             delay: 0.75,
             y: () => gsap.utils.random(-100, -200),
             x: () => gsap.utils.random(-50, 50),
             duration: () => gsap.utils.random(0.5, 1),
         })
-        .to('.char', { opacity: 0, duration: 0.25 }, '>-0.5')
+        .to('.char', {opacity: 0, duration: 0.25}, '>-0.5')
         .add(FROSTING_TL())
         .add(SPRINKLES_TL())
         .add(SPIN_TL())
@@ -338,17 +348,9 @@ const animStart = () => {
 
 BTN.addEventListener('click', () => {
     set('body', {overflow: 'hidden'})
-    timeline()
-        .to(".move-img-container", 0.8, { opacity: 0})
-        .to(".birthday-button", {
-            x: 90,
-            y: -180,
-            duration: 1.2
-        })
-        .to('.birthday-button', {
-        scale: 1,
-        duration: 0.2,
-        })
+    set('.char', {
+        color: 'hsl(var(--hue, 0), calc(var(--char-sat, 0) * 1%), calc(var(--char-light, 0) * 1%))'
+    })
     SOUNDS.BLOW.play()
     SOUNDS.CHEER.play()
     SOUNDS.TUNE.play()
@@ -365,13 +367,13 @@ BTN.addEventListener('click', () => {
 // last.js
 var w = c.width = window.innerWidth,
     h = c.height = window.innerHeight,
-    ctx = c.getContext( '2d' ),
+    ctx = c.getContext('2d'),
 
     hw = w / 2, // half-width
     hh = h / 2,
 
     opts = {
-        strings: [ '三七', '生日快乐!' ],
+        strings: ['三七', '生日快乐!'],
         charSize: 50,
         charSpacing: 60,
         lineHeight: 60,
@@ -408,11 +410,11 @@ var w = c.width = window.innerWidth,
         balloonAddedSize: 20,
         balloonBaseVel: .4,
         balloonAddedVel: .4,
-        balloonBaseRadian: -( Math.PI / 2 - .5 ),
+        balloonBaseRadian: -(Math.PI / 2 - .5),
         balloonAddedRadian: -1,
     },
     calc = {
-        totalWidth: opts.charSpacing * Math.max( opts.strings[0].length, opts.strings[1].length )
+        totalWidth: opts.charSpacing * Math.max(opts.strings[0].length, opts.strings[1].length)
     },
 
     Tau = Math.PI * 2,
@@ -422,43 +424,44 @@ var w = c.width = window.innerWidth,
 
 ctx.font = opts.charSize + 'px Verdana';
 
-function Letter( char, x, y ){
+function Letter(char, x, y) {
     this.char = char;
     this.x = x;
     this.y = y;
 
-    this.dx = -ctx.measureText( char ).width / 2;
+    this.dx = -ctx.measureText(char).width / 2;
     this.dy = +opts.charSize / 2;
 
     this.fireworkDy = this.y - hh;
 
     var hue = x / calc.totalWidth * 360;
 
-    this.color = 'hsl(hue,80%,50%)'.replace( 'hue', hue );
-    this.lightAlphaColor = 'hsla(hue,80%,light%,alp)'.replace( 'hue', hue );
-    this.lightColor = 'hsl(hue,80%,light%)'.replace( 'hue', hue );
-    this.alphaColor = 'hsla(hue,80%,50%,alp)'.replace( 'hue', hue );
+    this.color = 'hsl(hue,80%,50%)'.replace('hue', hue);
+    this.lightAlphaColor = 'hsla(hue,80%,light%,alp)'.replace('hue', hue);
+    this.lightColor = 'hsl(hue,80%,light%)'.replace('hue', hue);
+    this.alphaColor = 'hsla(hue,80%,50%,alp)'.replace('hue', hue);
 
     this.reset();
 }
-Letter.prototype.reset = function(){
+
+Letter.prototype.reset = function () {
 
     this.phase = 'firework';
     this.tick = 0;
     this.spawned = false;
-    this.spawningTime = opts.fireworkSpawnTime * Math.random() |0;
-    this.reachTime = opts.fireworkBaseReachTime + opts.fireworkAddedReachTime * Math.random() |0;
+    this.spawningTime = opts.fireworkSpawnTime * Math.random() | 0;
+    this.reachTime = opts.fireworkBaseReachTime + opts.fireworkAddedReachTime * Math.random() | 0;
     this.lineWidth = opts.fireworkBaseLineWidth + opts.fireworkAddedLineWidth * Math.random();
-    this.prevPoints = [ [ 0, hh, 0 ] ];
+    this.prevPoints = [[0, hh, 0]];
 }
-Letter.prototype.step = function(){
+Letter.prototype.step = function () {
 
-    if( this.phase === 'firework' ){
+    if (this.phase === 'firework') {
 
-        if( !this.spawned ){
+        if (!this.spawned) {
 
             ++this.tick;
-            if( this.tick >= this.spawningTime ){
+            if (this.tick >= this.spawningTime) {
 
                 this.tick = 0;
                 this.spawned = true;
@@ -469,152 +472,152 @@ Letter.prototype.step = function(){
             ++this.tick;
 
             var linearProportion = this.tick / this.reachTime,
-                armonicProportion = Math.sin( linearProportion * TauQuarter ),
+                armonicProportion = Math.sin(linearProportion * TauQuarter),
 
                 x = linearProportion * this.x,
                 y = hh + armonicProportion * this.fireworkDy;
 
-            if( this.prevPoints.length > opts.fireworkPrevPoints )
+            if (this.prevPoints.length > opts.fireworkPrevPoints)
                 this.prevPoints.shift();
 
-            this.prevPoints.push( [ x, y, linearProportion * this.lineWidth ] );
+            this.prevPoints.push([x, y, linearProportion * this.lineWidth]);
 
-            var lineWidthProportion = 1 / ( this.prevPoints.length - 1 );
+            var lineWidthProportion = 1 / (this.prevPoints.length - 1);
 
-            for( var i = 1; i < this.prevPoints.length; ++i ){
+            for (var i = 1; i < this.prevPoints.length; ++i) {
 
-                var point = this.prevPoints[ i ],
-                    point2 = this.prevPoints[ i - 1 ];
+                var point = this.prevPoints[i],
+                    point2 = this.prevPoints[i - 1];
 
-                ctx.strokeStyle = this.alphaColor.replace( 'alp', i / this.prevPoints.length );
-                ctx.lineWidth = point[ 2 ] * lineWidthProportion * i;
+                ctx.strokeStyle = this.alphaColor.replace('alp', i / this.prevPoints.length);
+                ctx.lineWidth = point[2] * lineWidthProportion * i;
                 ctx.beginPath();
-                ctx.moveTo( point[ 0 ], point[ 1 ] );
-                ctx.lineTo( point2[ 0 ], point2[ 1 ] );
+                ctx.moveTo(point[0], point[1]);
+                ctx.lineTo(point2[0], point2[1]);
                 ctx.stroke();
 
             }
 
-            if( this.tick >= this.reachTime ){
+            if (this.tick >= this.reachTime) {
 
                 this.phase = 'contemplate';
 
                 this.circleFinalSize = opts.fireworkCircleBaseSize + opts.fireworkCircleAddedSize * Math.random();
-                this.circleCompleteTime = opts.fireworkCircleBaseTime + opts.fireworkCircleAddedTime * Math.random() |0;
+                this.circleCompleteTime = opts.fireworkCircleBaseTime + opts.fireworkCircleAddedTime * Math.random() | 0;
                 this.circleCreating = true;
                 this.circleFading = false;
 
-                this.circleFadeTime = opts.fireworkCircleFadeBaseTime + opts.fireworkCircleFadeAddedTime * Math.random() |0;
+                this.circleFadeTime = opts.fireworkCircleFadeBaseTime + opts.fireworkCircleFadeAddedTime * Math.random() | 0;
                 this.tick = 0;
                 this.tick2 = 0;
 
                 this.shards = [];
 
-                var shardCount = opts.fireworkBaseShards + opts.fireworkAddedShards * Math.random() |0,
+                var shardCount = opts.fireworkBaseShards + opts.fireworkAddedShards * Math.random() | 0,
                     angle = Tau / shardCount,
-                    cos = Math.cos( angle ),
-                    sin = Math.sin( angle ),
+                    cos = Math.cos(angle),
+                    sin = Math.sin(angle),
 
                     x = 1,
                     y = 0;
 
-                for( var i = 0; i < shardCount; ++i ){
+                for (var i = 0; i < shardCount; ++i) {
                     var x1 = x;
                     x = x * cos - y * sin;
                     y = y * cos + x1 * sin;
 
-                    this.shards.push( new Shard( this.x, this.y, x, y, this.alphaColor ) );
+                    this.shards.push(new Shard(this.x, this.y, x, y, this.alphaColor));
                 }
             }
 
         }
-    } else if( this.phase === 'contemplate' ){
+    } else if (this.phase === 'contemplate') {
 
         ++this.tick;
 
-        if( this.circleCreating ){
+        if (this.circleCreating) {
 
             ++this.tick2;
             var proportion = this.tick2 / this.circleCompleteTime,
-                armonic = -Math.cos( proportion * Math.PI ) / 2 + .5;
+                armonic = -Math.cos(proportion * Math.PI) / 2 + .5;
 
             ctx.beginPath();
-            ctx.fillStyle = this.lightAlphaColor.replace( 'light', 50 + 50 * proportion ).replace( 'alp', proportion );
+            ctx.fillStyle = this.lightAlphaColor.replace('light', 50 + 50 * proportion).replace('alp', proportion);
             ctx.beginPath();
-            ctx.arc( this.x, this.y, armonic * this.circleFinalSize, 0, Tau );
+            ctx.arc(this.x, this.y, armonic * this.circleFinalSize, 0, Tau);
             ctx.fill();
 
-            if( this.tick2 > this.circleCompleteTime ){
+            if (this.tick2 > this.circleCompleteTime) {
                 this.tick2 = 0;
                 this.circleCreating = false;
                 this.circleFading = true;
             }
-        } else if( this.circleFading ){
+        } else if (this.circleFading) {
 
-            ctx.fillStyle = this.lightColor.replace( 'light', 70 );
-            ctx.fillText( this.char, this.x + this.dx, this.y + this.dy );
+            ctx.fillStyle = this.lightColor.replace('light', 70);
+            ctx.fillText(this.char, this.x + this.dx, this.y + this.dy);
 
             ++this.tick2;
             var proportion = this.tick2 / this.circleFadeTime,
-                armonic = -Math.cos( proportion * Math.PI ) / 2 + .5;
+                armonic = -Math.cos(proportion * Math.PI) / 2 + .5;
 
             ctx.beginPath();
-            ctx.fillStyle = this.lightAlphaColor.replace( 'light', 100 ).replace( 'alp', 1 - armonic );
-            ctx.arc( this.x, this.y, this.circleFinalSize, 0, Tau );
+            ctx.fillStyle = this.lightAlphaColor.replace('light', 100).replace('alp', 1 - armonic);
+            ctx.arc(this.x, this.y, this.circleFinalSize, 0, Tau);
             ctx.fill();
 
-            if( this.tick2 >= this.circleFadeTime )
+            if (this.tick2 >= this.circleFadeTime)
                 this.circleFading = false;
 
         } else {
 
-            ctx.fillStyle = this.lightColor.replace( 'light', 70 );
-            ctx.fillText( this.char, this.x + this.dx, this.y + this.dy );
+            ctx.fillStyle = this.lightColor.replace('light', 70);
+            ctx.fillText(this.char, this.x + this.dx, this.y + this.dy);
         }
 
-        for( var i = 0; i < this.shards.length; ++i ){
+        for (var i = 0; i < this.shards.length; ++i) {
 
-            this.shards[ i ].step();
+            this.shards[i].step();
 
-            if( !this.shards[ i ].alive ){
-                this.shards.splice( i, 1 );
+            if (!this.shards[i].alive) {
+                this.shards.splice(i, 1);
                 --i;
             }
         }
 
-        if( this.tick > opts.letterContemplatingWaitTime ){
+        if (this.tick > opts.letterContemplatingWaitTime) {
 
             this.phase = 'balloon';
 
             this.tick = 0;
             this.spawning = true;
-            this.spawnTime = opts.balloonSpawnTime * Math.random() |0;
+            this.spawnTime = opts.balloonSpawnTime * Math.random() | 0;
             this.inflating = false;
-            this.inflateTime = opts.balloonBaseInflateTime + opts.balloonAddedInflateTime * Math.random() |0;
-            this.size = opts.balloonBaseSize + opts.balloonAddedSize * Math.random() |0;
+            this.inflateTime = opts.balloonBaseInflateTime + opts.balloonAddedInflateTime * Math.random() | 0;
+            this.size = opts.balloonBaseSize + opts.balloonAddedSize * Math.random() | 0;
 
             var rad = opts.balloonBaseRadian + opts.balloonAddedRadian * Math.random(),
                 vel = opts.balloonBaseVel + opts.balloonAddedVel * Math.random();
 
-            this.vx = Math.cos( rad ) * vel;
-            this.vy = Math.sin( rad ) * vel;
+            this.vx = Math.cos(rad) * vel;
+            this.vy = Math.sin(rad) * vel;
         }
-    } else if( this.phase === 'balloon' ){
+    } else if (this.phase === 'balloon') {
 
-        ctx.strokeStyle = this.lightColor.replace( 'light', 80 );
+        ctx.strokeStyle = this.lightColor.replace('light', 80);
 
-        if( this.spawning ){
+        if (this.spawning) {
 
             ++this.tick;
-            ctx.fillStyle = this.lightColor.replace( 'light', 70 );
-            ctx.fillText( this.char, this.x + this.dx, this.y + this.dy );
+            ctx.fillStyle = this.lightColor.replace('light', 70);
+            ctx.fillText(this.char, this.x + this.dx, this.y + this.dy);
 
-            if( this.tick >= this.spawnTime ){
+            if (this.tick >= this.spawnTime) {
                 this.tick = 0;
                 this.spawning = false;
                 this.inflating = true;
             }
-        } else if( this.inflating ){
+        } else if (this.inflating) {
 
             ++this.tick;
 
@@ -622,20 +625,20 @@ Letter.prototype.step = function(){
                 x = this.cx = this.x,
                 y = this.cy = this.y - this.size * proportion;
 
-            ctx.fillStyle = this.alphaColor.replace( 'alp', proportion );
+            ctx.fillStyle = this.alphaColor.replace('alp', proportion);
             ctx.beginPath();
-            generateBalloonPath( x, y, this.size * proportion );
+            generateBalloonPath(x, y, this.size * proportion);
             ctx.fill();
 
             ctx.beginPath();
-            ctx.moveTo( x, y );
-            ctx.lineTo( x, this.y );
+            ctx.moveTo(x, y);
+            ctx.lineTo(x, this.y);
             ctx.stroke();
 
-            ctx.fillStyle = this.lightColor.replace( 'light', 70 );
-            ctx.fillText( this.char, this.x + this.dx, this.y + this.dy );
+            ctx.fillStyle = this.lightColor.replace('light', 70);
+            ctx.fillText(this.char, this.x + this.dx, this.y + this.dy);
 
-            if( this.tick >= this.inflateTime ){
+            if (this.tick >= this.inflateTime) {
                 this.tick = 0;
                 this.inflating = false;
             }
@@ -647,24 +650,25 @@ Letter.prototype.step = function(){
 
             ctx.fillStyle = this.color;
             ctx.beginPath();
-            generateBalloonPath( this.cx, this.cy, this.size );
+            generateBalloonPath(this.cx, this.cy, this.size);
             ctx.fill();
 
             ctx.beginPath();
-            ctx.moveTo( this.cx, this.cy );
-            ctx.lineTo( this.cx, this.cy + this.size );
+            ctx.moveTo(this.cx, this.cy);
+            ctx.lineTo(this.cx, this.cy + this.size);
             ctx.stroke();
 
-            ctx.fillStyle = this.lightColor.replace( 'light', 70 );
-            ctx.fillText( this.char, this.cx + this.dx, this.cy + this.dy + this.size );
+            ctx.fillStyle = this.lightColor.replace('light', 70);
+            ctx.fillText(this.char, this.cx + this.dx, this.cy + this.dy + this.size);
 
-            if( this.cy + this.size < -hh || this.cx < -hw || this.cy > hw  )
+            if (this.cy + this.size < -hh || this.cx < -hw || this.cy > hw)
                 this.phase = 'done';
 
         }
     }
 }
-function Shard( x, y, vx, vy, color ){
+
+function Shard(x, y, vx, vy, color) {
 
     var vel = opts.fireworkShardBaseVel + opts.fireworkShardAddedVel * Math.random();
 
@@ -674,86 +678,88 @@ function Shard( x, y, vx, vy, color ){
     this.x = x;
     this.y = y;
 
-    this.prevPoints = [ [ x, y ] ];
+    this.prevPoints = [[x, y]];
     this.color = color;
 
     this.alive = true;
 
     this.size = opts.fireworkShardBaseSize + opts.fireworkShardAddedSize * Math.random();
 }
-Shard.prototype.step = function(){
+
+Shard.prototype.step = function () {
 
     this.x += this.vx;
     this.y += this.vy += opts.gravity;
 
-    if( this.prevPoints.length > opts.fireworkShardPrevPoints )
+    if (this.prevPoints.length > opts.fireworkShardPrevPoints)
         this.prevPoints.shift();
 
-    this.prevPoints.push( [ this.x, this.y ] );
+    this.prevPoints.push([this.x, this.y]);
 
     var lineWidthProportion = this.size / this.prevPoints.length;
 
-    for( var k = 0; k < this.prevPoints.length - 1; ++k ){
+    for (var k = 0; k < this.prevPoints.length - 1; ++k) {
 
-        var point = this.prevPoints[ k ],
-            point2 = this.prevPoints[ k + 1 ];
+        var point = this.prevPoints[k],
+            point2 = this.prevPoints[k + 1];
 
-        ctx.strokeStyle = this.color.replace( 'alp', k / this.prevPoints.length );
+        ctx.strokeStyle = this.color.replace('alp', k / this.prevPoints.length);
         ctx.lineWidth = k * lineWidthProportion;
         ctx.beginPath();
-        ctx.moveTo( point[ 0 ], point[ 1 ] );
-        ctx.lineTo( point2[ 0 ], point2[ 1 ] );
+        ctx.moveTo(point[0], point[1]);
+        ctx.lineTo(point2[0], point2[1]);
         ctx.stroke();
 
     }
 
-    if( this.prevPoints[ 0 ][ 1 ] > hh )
+    if (this.prevPoints[0][1] > hh)
         this.alive = false;
 }
-function generateBalloonPath( x, y, size ){
 
-    ctx.moveTo( x, y );
-    ctx.bezierCurveTo( x - size / 2, y - size / 2,
+function generateBalloonPath(x, y, size) {
+
+    ctx.moveTo(x, y);
+    ctx.bezierCurveTo(x - size / 2, y - size / 2,
         x - size / 4, y - size,
-        x,            y - size );
-    ctx.bezierCurveTo( x + size / 4, y - size,
+        x, y - size);
+    ctx.bezierCurveTo(x + size / 4, y - size,
         x + size / 2, y - size / 2,
-        x,            y );
+        x, y);
 }
 
-function anim(){
+function anim() {
 
-    window.requestAnimationFrame( anim );
+    window.requestAnimationFrame(anim);
 
     ctx.fillStyle = '#111';
-    ctx.fillRect( 0, 0, w, h );
+    ctx.fillRect(0, 0, w, h);
 
-    ctx.translate( hw, hh );
+    ctx.translate(hw, hh);
 
     var done = true;
-    for( var l = 0; l < letters.length; ++l ){
+    for (var l = 0; l < letters.length; ++l) {
 
-        letters[ l ].step();
-        if( letters[ l ].phase !== 'done' )
+        letters[l].step();
+        if (letters[l].phase !== 'done')
             done = false;
     }
 
-    ctx.translate( -hw, -hh );
+    ctx.translate(-hw, -hh);
 
-    if( done )
-        for( var l = 0; l < letters.length; ++l )
-            letters[ l ].reset();
+    if (done)
+        for (var l = 0; l < letters.length; ++l)
+            letters[l].reset();
 }
 
-for( var i = 0; i < opts.strings.length; ++i ){
-    for( var j = 0; j < opts.strings[ i ].length; ++j ){
-        letters.push( new Letter( opts.strings[ i ][ j ],
-            j * opts.charSpacing + opts.charSpacing / 2 - opts.strings[ i ].length * opts.charSize / 2,
-            i * opts.lineHeight + opts.lineHeight / 2 - opts.strings.length * opts.lineHeight / 2 ) );
+for (var i = 0; i < opts.strings.length; ++i) {
+    for (var j = 0; j < opts.strings[i].length; ++j) {
+        letters.push(new Letter(opts.strings[i][j],
+            j * opts.charSpacing + opts.charSpacing / 2 - opts.strings[i].length * opts.charSize / 2,
+            i * opts.lineHeight + opts.lineHeight / 2 - opts.strings.length * opts.lineHeight / 2));
     }
 }
 
-window.addEventListener( 'resize', function(){
+window.addEventListener('resize', function () {
 
     w = c.width = window.innerWidth;
     h = c.height = window.innerHeight;
