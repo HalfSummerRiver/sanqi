@@ -53,7 +53,8 @@ const SOUNDS = {
     POP1: new Audio('https://s2-12475.kwimgs.com/kos/nlav12475/qatar2022/medal/audio/pop1.mp3'),
     POP2: new Audio('https://s2-12475.kwimgs.com/kos/nlav12475/qatar2022/medal/audio/pop2.mp3'),
     POP3: new Audio('https://s2-12475.kwimgs.com/kos/nlav12475/qatar2022/medal/audio/pop3.mp3'),
-    HORN: new Audio('https://s2-12475.kwimgs.com/kos/nlav12475/qatar2022/medal/audio/horn-done.mp3')
+    HORN: new Audio('https://s2-12475.kwimgs.com/kos/nlav12475/qatar2022/medal/audio/horn-done.mp3'),
+    BACK: new Audio('https://s2-12475.kwimgs.com/kos/nlav12475/qatar2022/medal/audio/back.mp3')
 }
 LEFT_BTN.addEventListener('click', () => {
     timeline().to('.cover', {
@@ -63,6 +64,7 @@ LEFT_BTN.addEventListener('click', () => {
             set('body', {overflow: 'auto'})
         }
     })
+    SOUNDS.BACK.play()
 })
 
 // comic
@@ -351,6 +353,7 @@ BTN.addEventListener('click', () => {
     set('.char', {
         color: 'hsl(var(--hue, 0), calc(var(--char-sat, 0) * 1%), calc(var(--char-light, 0) * 1%))'
     })
+    SOUNDS.BACK.pause()
     SOUNDS.BLOW.play()
     SOUNDS.CHEER.play()
     SOUNDS.TUNE.play()
